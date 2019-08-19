@@ -1,0 +1,4 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "urlboi" %></h1>
+  <%= render "form.html", Map.put(assigns, :action, Routes.page_path(@conn, :create)) %>
+</section>
