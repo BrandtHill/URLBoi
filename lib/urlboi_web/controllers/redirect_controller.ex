@@ -1,10 +1,11 @@
 defmodule UrlboiWeb.RedirectController do
   use UrlboiWeb, :controller
-  import Urlboi.ShortUrls
-
-  action_fallback UrlboiWeb.FallbackController
+  
+  alias Urlboi.ShortUrls
 
   def index(conn, %{"shortpath" => shortpath}) do
-    redirect(conn, external: get_short_url!(shortpath).url)
+    short_url = ShortUrls.get_short_url!(shortpath)
+    redirect(conn, external: short_url.url)
+    ShortUrls.increment_visits(short_url)
   end
 end

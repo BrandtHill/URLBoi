@@ -11,15 +11,6 @@ defmodule UrlboiWeb.ShortUrlController do
     render(conn, "index.json", short_urls: short_urls)
   end
 
-  def new(conn, %{"short_url" => short_url_params}) do
-    with {:ok, %ShortUrl{} = short_url} <- ShortUrls.create_short_url(short_url_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.short_url_path(conn, :show, short_url))
-      |> current_path
-    end
-  end
-
   def create(conn, %{"short_url" => short_url_params}) do
     with {:ok, %ShortUrl{} = short_url} <- ShortUrls.create_short_url(short_url_params) do
       conn

@@ -1,0 +1,5 @@
+<section class="phx-hero">
+  <h1><%= gettext "Urlboi created a URL for you!" %></h1>
+  <h3 id="full-short-url"> <%= "https://urlboi.io/" <> @short_url %></h3>
+  <%= button("Go to Link", method: "get", type: "button", to: @short_url) %>
+</section>

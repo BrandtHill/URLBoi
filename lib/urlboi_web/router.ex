@@ -17,7 +17,7 @@ defmodule UrlboiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    post "/", PageController, :create
+    post "/create", PageController, :create
     get "/:shortpath", RedirectController, :index
   end
 

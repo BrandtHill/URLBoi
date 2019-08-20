@@ -28,4 +28,9 @@ defmodule Urlboi.ShortUrls do
 
   def change_short_url(%ShortUrl{} = short_url), do: ShortUrl.changeset(short_url, %{})
 
+  def increment_visits(%ShortUrl{} = short_url) do
+    from(s in ShortUrl, where: s.id == ^short_url.id, update: [inc: [visits: 1]])
+    |> Repo.update_all([])
+  end
+
 end
