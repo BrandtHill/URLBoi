@@ -66,7 +66,6 @@ short_url_input.addEventListener('input', e => {
   timeout = setTimeout(() => {
     channel.push('test_query', {value: short_url_input.value})
   }, 750)
-  
 })
 
 channel.on('test_result', payload => {
