@@ -4,16 +4,18 @@
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-
   <%= label f, :shortpath, "Short URL" %>
-  urlboi.io/<%= text_input f, :shortpath %>
-  <%= error_tag f, :shortpath %>
+  <small id="tooltip"></small>
+  <div id="short-wrapper">
+    <h2>urlboi.io/</h2>
+    <%= text_input f, :shortpath %>
+    <%= error_tag f, :shortpath %>
+  </div>
 
   <%= label f, :url, "URL" %>
   <%= url_input f, :url %>
   <%= error_tag f, :url %>
-
   <div>
-    <%= submit "Create" %>
+    <%= submit "Create", disabled: true, id: "create-btn" %>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-# Urlboi
+# UrlBoi
 
 To start your Phoenix server:
 

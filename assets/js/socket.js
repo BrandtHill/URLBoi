@@ -59,25 +59,33 @@ let random = Math.random().toString(36).substr(2, 5);
 let channel = socket.channel(`urlpath:${random}`, {})
 let timeout
 
-let short_url_input = document.getElementById('short_url_shortpath')
+let short_input = document.getElementById('short_url_shortpath')
+let long_input = document.getElementById('short_url_url')
+let create_button = document.getElementById('create-btn')
+let tooltip = document.getElementById('tooltip')
 
-short_url_input.addEventListener('input', e => {
+let onTextInput = (e) => {
   clearTimeout(timeout)
-  timeout = setTimeout(() => {
-    channel.push('test_query', {value: short_url_input.value})
-  }, 750)
-})
+  timeout = setTimeout(() => channel.push('test_query', 
+  {
+    shortpath: short_input.value,
+    url: long_input.value
+  }), 500)
+}
+
+short_input.addEventListener('input', onTextInput, 500)
+long_input.addEventListener('input', onTextInput, 500)
 
 channel.on('test_result', payload => {
   console.log(payload)
-  if (payload.available) console.log("This url is available")
-  else console.log("This url is already taken")
+  create_button.disabled = !payload.available
+  tooltip.innerText = payload.msg
+  short_input.style.backgroundColor = payload.available ? "#a8dba0" : "#e3b0ac"
 })
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
-
 
 
 export default socket
