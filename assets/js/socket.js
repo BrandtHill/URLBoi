@@ -55,9 +55,30 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+let random = Math.random().toString(36).substr(2, 5);
+let channel = socket.channel(`urlpath:${random}`, {})
+let timeout
+
+let short_url_input = document.getElementById('short_url_shortpath')
+
+short_url_input.addEventListener('input', e => {
+  clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    channel.push('test_query', {value: short_url_input.value})
+  }, 750)
+  
+})
+
+channel.on('test_result', payload => {
+  console.log(payload)
+  if (payload.available) console.log("This url is available")
+  else console.log("This url is already taken")
+})
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+
 
 export default socket

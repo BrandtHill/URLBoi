@@ -12,6 +12,8 @@ defmodule Urlboi.ShortUrls do
 
   def get_short_url!(id), do: Repo.get_by!(ShortUrl, shortpath: id)
 
+  def get_short_url(id), do: Repo.get_by(ShortUrl, shortpath: id)
+
   def create_short_url(attrs \\ %{}) do
     %ShortUrl{}
     |> ShortUrl.changeset(attrs)
