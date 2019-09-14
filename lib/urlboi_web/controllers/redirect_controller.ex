@@ -5,7 +5,7 @@ defmodule UrlboiWeb.RedirectController do
 
   def index(conn, %{"shortpath" => shortpath}) do
     short_url = ShortUrls.get_short_url!(shortpath)
-    redirect(conn, external: short_url.url)
     ShortUrls.increment_visits(short_url)
+    redirect(conn, external: short_url.url)
   end
 end

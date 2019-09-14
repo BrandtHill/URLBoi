@@ -12,7 +12,7 @@ config :urlboi,
 
 # Configures the endpoint
 config :urlboi, UrlboiWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "urlboi.io"],
   secret_key_base: "NSO4VtOgg0hQDMO7Ydx9TBaX+57YPCT4qmZIBogWBsYYbcrLBFY4qRwKKp4ScDu5",
   render_errors: [view: UrlboiWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Urlboi.PubSub, adapter: Phoenix.PubSub.PG2]
